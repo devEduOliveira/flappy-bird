@@ -33,11 +33,11 @@
             position: absolute;
             height: 100%;
             top: 0;
-            right: 20px;
 
             .cano{
                 position: absolute;
                 width: 70px;
+                right: 0;;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -76,14 +76,3 @@
 
 .down{ transform: rotate(30deg); }
 .up{ transform: rotate(-30deg); }
-
-.top{ 
-    top: 0; 
-    transform: rotate(180deg);
-    height: 270px;
-}
-
-.bottom{ 
-    bottom: 90px;
-    height: 120px;
-}

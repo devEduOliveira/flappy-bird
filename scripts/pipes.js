@@ -1,10 +1,16 @@
 
 const gameBoard = document.querySelector('.gameBoard')
-let positionStart = 0;
-let ativo = true;
-let pipesArray = []; // vamos salvar aqui
 
-function drawPipe(){
+let gameState = {
+
+    positionStart: 0,
+    loopGeneratePipe: true,
+    pipesArray: [],
+
+    gameStarted: false
+}
+
+function drawPipeLoop(){
     setInterval(() => {
         createNewPipe()
     }, 2500);
@@ -17,15 +23,15 @@ function createElement(element, classList){
 }
 
 function movePipes() {
-    if(!ativo) return;
+    if(!gameState.loopGeneratePipe) return;
 
-    pipesArray.forEach((pipeObj, index) => {
+    gameState.pipesArray.forEach((pipeObj, index) => {
         pipeObj.position += 2;
         pipeObj.element.style.right = pipeObj.position + "px"
 
         if(pipeObj.position >= 500){
             gameBoard.removeChild(pipeObj.element)
-            pipesArray.splice(index, 1)
+            gameState.pipesArray.splice(index, 1)
         }
     });
 
@@ -34,10 +40,10 @@ function movePipes() {
 
 function createNewPipe() {
     const pipe = createPipeGroup()
-    pipe.style.right = positionStart + "px"
+    pipe.style.right = gameState.positionStart + "px"
     gameBoard.appendChild(pipe)
 
-    pipesArray.push({element: pipe, position: positionStart})
+    gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
 }
 
 function createPipeGroup(){
@@ -61,7 +67,18 @@ function createPipe(position){
     return pipe;
 }
 
-drawPipe()
+function startGame(event){
+    if(!gameState.gameStarted && 
+        event.key === "" || 
+        event.code === "Space"
+    ){
+
+        gameState.gameStarted = true;
+        drawPipeLoop()
+    }
+}
+
+window.addEventListener("keydown", startGame)
 movePipes()
 
 

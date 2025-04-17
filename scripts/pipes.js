@@ -1,30 +1,13 @@
+import { createElement, gameBoard, gameState } from "./global.js";
 
-const gameBoard = document.querySelector('.gameBoard')
-
-let gameState = {
-
-    positionStart: -100,
-    loopGeneratePipe: true,
-    pipesArray: [],
-
-    gameStarted: false,
-    tickSpeed: 2000
-}
-
-function drawPipeLoop(){
+export function drawPipeLoop(){
     setInterval(() => {
         createNewPipe()
     }, gameState.tickSpeed);
 }
 
-function createElement(element, classList){
-    const card = document.createElement(element)
-    card.classList = classList;
-    return card;
-}
-
 function movePipes() {
-    if(!gameState.loopGeneratePipe) return;
+    if(!gameState.loopGenerate) return;
 
     gameState.pipesArray.forEach((pipeObj, index) => {
         pipeObj.position += 2.49;
@@ -96,7 +79,6 @@ function positionPipe(pipe, type) {
     }
 }
 
-
 function createPipe(position){
     const pipe = createElement("div", `cano ${position}`)        
     const pipeHead = createElement("div", "head")
@@ -107,21 +89,7 @@ function createPipe(position){
     return pipe;
 }
 
-function startGame(event){
-    if(!gameState.gameStarted && (
-        event.key === "" || 
-        event.code === "Space")
-    ){
-
-        gameState.gameStarted = true;
-        console.log(gameState.gameStarted);
-        
-        drawPipeLoop()
-    }
-}
-
-window.addEventListener("keydown", startGame)
-movePipes()
+window.addEventListener("DOMContentLoaded", movePipes)
 
 
 

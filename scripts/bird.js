@@ -1,64 +1,61 @@
 import { createElement, gameBoard, gameState } from "./global.js";
-let birdElement = null;
-let gameInterval;
 
-export function drawBirdElement(){
-    const bird = createElement("div", "bird")
-    gameBoard.appendChild(bird)
-    birdElement = bird
+let birdState = {
+    screenTop: -30,   
+    screenBottom: 480,
 
-    drawBird()
+    birdElement: "",
+    gameIntervalBird: "",
+    gravityValue: 2,
+    gravityAcceleration: 0.8, 
+    gravityMax: 20,
+    birdY: 1
 }
 
-let spacePressed = false;
+function drawBirdElement(){
+    const bird = createElement("div", "bird")
+    birdState.birdElement = bird
+    birdState.birdElement.style.top = "150px";
+    gameBoard.appendChild(bird)
+}
 
-// Detecta quando uma tecla é pressionada
-document.addEventListener("keydown", function(event) {
-    if (event.code === "Space") {
-        spacePressed = true
-        drawBird()
+export function drawBird() {
+    gameLoop(); 
+}
 
-        setPosition("up")
-    }
-});
-
-function drawBird() {
-    spacePressed ? spacePressed = false : spacePressed = true;
-    gameLoop(); // Continua o jogo normalmente
+export function jumpBird(){
+    setPosition("up")
+    
 }
 
 function gameLoop(){
-    clearInterval(gameInterval)
-    gameInterval = setInterval(() => {
+    clearInterval(gameState.gameIntervalBird)
+    gameState.gameIntervalBird = setInterval(() => {
         gravity()
-    }, 20)
+    }, gameState.tickRate)
 }
 
-
-let gravityValue = 0.2; // valor base de início
-let gravityAcceleration = 0.15; // quanto aumenta por tick
-let gravityMax = 1.2; // limite de gravidade
-
 function gravity() {
-    if(gravityValue < gravityMax){
-        gravityValue += gravityAcceleration;
+    if(birdState.gravityValue < birdState.gravityMax){
+        birdState.gravityValue += birdState.gravityAcceleration;
     }
     setPosition("down")
 }
 
-function setPosition(direction){
-    let birdTop = parseFloat(birdElement.style.top) || 0;
-    let position;
-    
-    direction == "down" ? position = (birdTop += 7 * gravityValue) : position = (birdTop -= 200)
-    
+function setPosition(direction) {
     if (direction === "down") {
-        position = birdTop + gravityValue * 6; // queda gradual e fluida
+        birdState.birdY += birdState.gravityValue * 6;
     } else {
-        gravityValue = 0.6; // reseta leve a gravidade após o pulo
-        position = birdTop - 70; // pulo suave, sem exagerar
+        birdState.gravityValue = 0;
+        birdState.birdY -= 250;
     }
 
-    birdElement.style.top = position+ "px";
+    birdState.birdY = Math.max(birdState.screenTop, Math.min(birdState.birdY, birdState.screenBottom));
+
+    birdState.birdElement.style.top = `${birdState.birdY}px`;
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    drawBirdElement()
+})
 

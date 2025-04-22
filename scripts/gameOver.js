@@ -31,6 +31,7 @@ createGameOver()
 
 export function showGameOver(boolean){
     document.querySelector(".modalGameOver").classList.toggle("hidden", boolean)
+    gameState.gameOver = !boolean;
 }
 
 window.addEventListener("keydown", closeModal)

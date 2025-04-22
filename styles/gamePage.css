@@ -7,7 +7,65 @@
     background-position: inherit;
     background-position: 0 0;
 
+    .modalGameOver{
+        position: absolute;
+        width: 400px;
+        height: 610px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.699);
     
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .title{
+            position: absolute;
+            top: 70px;
+            color: yellow;
+            font-size: 48px;
+        }
+
+        .tempScore{
+            position: absolute;
+            top: 120px;
+            color: yellow;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .insertNickname{
+            margin: 12px 0;
+            padding: 2px 12px;
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            background-color: #ffffff21;
+            color: yellow;
+            border-radius: 5px;
+            text-transform: capitalize;
+            border: 2px solid transparent;
+            
+            &:focus{
+                border: 2px solid yellow;
+                outline: none;
+            }
+        }
+
+        .textReload{
+            cursor: pointer;
+            margin-top: 2px;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            color: yellow;
+            transition: 0.3s all linear;
+        
+        }
+
+    }
+
     .gameBoard{
         position: relative;
         width: 400px;
@@ -21,7 +79,7 @@
             
             left: 165px;
             top: 150px;
-            z-index: 99;
+            z-index: 9;
 
             transition: 0.3s all linear;
 
@@ -80,3 +138,7 @@
 
 .down{ transform: rotate(30deg); }
 .up{ transform: rotate(-30deg); }
+
+.hidden{
+    display: none !important;
+}

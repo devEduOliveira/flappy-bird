@@ -1,12 +1,14 @@
 import { createElement, gameBoard, gameState } from "./global.js";
 
-export function drawPipeLoop(){
-    setInterval(() => {
-        createNewPipe()
+export function drawPipeLoop() {
+    clearInterval(gameState.pipeIntervalId); // limpa o anterior, mesmo que seja null
+
+    gameState.pipeIntervalId = setInterval(() => {
+        createNewPipe();
     }, gameState.tickSpeed);
 }
 
-function movePipes() {
+export function movePipes() {
     if(!gameState.loopGenerate) return;
 
     gameState.pipesArray.forEach((pipeObj, index) => {
@@ -92,8 +94,14 @@ function createPipe(position){
     return pipe;
 }
 
-window.addEventListener("DOMContentLoaded", movePipes)
+export function resetGamePipes() {
+    gameState.pipesArray = []; 
+    let pipesInGameBoard = gameBoard.querySelectorAll(".pipe")
+    pipesInGameBoard.forEach(pipe => {
+        gameBoard.removeChild(pipe)
+    });
 
+}
 
 
 

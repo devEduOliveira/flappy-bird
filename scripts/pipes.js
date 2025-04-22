@@ -23,11 +23,14 @@ function movePipes() {
 }
 
 function createNewPipe() {
-    const pipe = createPipeGroup()
-    pipe.style.right = gameState.positionStart + "px"
-    gameBoard.appendChild(pipe)
-
-    gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
+    if(gameState.gameStarted){
+        const pipe = createPipeGroup()
+        pipe.style.right = gameState.positionStart + "px"
+        gameBoard.appendChild(pipe)
+    
+        gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
+    
+    }
 }
 
 function createPipeGroup() {

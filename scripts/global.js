@@ -37,8 +37,13 @@ function handleKeyPress(event){
         console.log("startgame");         
     }
 
-
-
-
 }
+
+
+export function stopGame(){
+    document.querySelector(".game").classList.remove("moveBackground")
+    gameState.loopGenerate = false;
+    gameState.gameStarted = false;
+}
+
 window.addEventListener("keydown", handleKeyPress)

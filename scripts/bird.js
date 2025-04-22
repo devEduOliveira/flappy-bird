@@ -1,8 +1,9 @@
+import { checkColision } from "./collision.js";
 import { createElement, gameBoard, gameState } from "./global.js";
 
 let birdState = {
     screenTop: -30,   
-    screenBottom: 480,
+    screenBottom: 490,
 
     birdElement: "",
     gameIntervalBird: "",
@@ -32,6 +33,7 @@ function gameLoop(){
     clearInterval(gameState.gameIntervalBird)
     gameState.gameIntervalBird = setInterval(() => {
         gravity()
+        checkColision(birdState.birdElement)
     }, gameState.tickRate)
 }
 

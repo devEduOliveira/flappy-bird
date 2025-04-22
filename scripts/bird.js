@@ -1,7 +1,7 @@
 import { checkColision } from "./collision.js";
 import { createElement, gameBoard, gameState } from "./global.js";
 
-let birdState = {
+export let birdState = {
     screenTop: -30,   
     screenBottom: 490,
 
@@ -25,8 +25,7 @@ export function drawBird() {
 }
 
 export function jumpBird(){
-    setPosition("up")
-    
+    setPosition("up") 
 }
 
 function gameLoop(){
@@ -45,16 +44,18 @@ function gravity() {
 }
 
 function setPosition(direction) {
-    if (direction === "down") {
-        birdState.birdY += birdState.gravityValue * 6;
-    } else {
-        birdState.gravityValue = 0;
-        birdState.birdY -= 250;
+    if(gameState.gameStarted){
+        if (direction === "down") {
+            birdState.birdY += birdState.gravityValue * 6;
+        } else {
+            birdState.gravityValue = 0;
+            birdState.birdY -= 250;
+        }
+    
+        birdState.birdY = Math.max(birdState.screenTop, Math.min(birdState.birdY, birdState.screenBottom));
+    
+        birdState.birdElement.style.top = `${birdState.birdY}px`;
     }
-
-    birdState.birdY = Math.max(birdState.screenTop, Math.min(birdState.birdY, birdState.screenBottom));
-
-    birdState.birdElement.style.top = `${birdState.birdY}px`;
 }
 
 window.addEventListener("DOMContentLoaded", () => {

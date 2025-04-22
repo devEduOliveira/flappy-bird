@@ -20,8 +20,8 @@ export function checkColision(element){
                 stopGame() 
             }
         })
-
-        if(birdCoords.top == 658){
+        
+        if(birdCoords.top == 543.75){
             stopGame()    
         }
     }

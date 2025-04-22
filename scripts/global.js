@@ -1,4 +1,4 @@
-import { drawBirdElement } from "./bird.js";
+import { drawBird, jumpBird } from "./bird.js";
 import { drawPipeLoop } from "./pipes.js";
 
 export const gameBoard = document.querySelector('.gameBoard')
@@ -9,7 +9,8 @@ export let gameState = {
     pipesArray: [],
 
     gameStarted: false,
-    tickSpeed: 2000
+    tickSpeed: 2000,
+    tickRate: 60
 }
 
 export function createElement(element, classList){
@@ -20,6 +21,11 @@ export function createElement(element, classList){
 
 
 function handleKeyPress(event){
+    if (event.code === "Space" && 
+        gameState.gameStarted
+    ){
+        jumpBird();
+    }
 
     if(!gameState.gameStarted && (
         event.key == "" || 
@@ -27,10 +33,17 @@ function handleKeyPress(event){
     )){
         gameState.gameStarted = true;
         drawPipeLoop()
-        drawBirdElement()
-        console.log("startgame");
-               
+        drawBird()
+        console.log("startgame");         
     }
 
 }
+
+
+export function stopGame(){
+    document.querySelector(".game").classList.remove("moveBackground")
+    gameState.loopGenerate = false;
+    gameState.gameStarted = false;
+}
+
 window.addEventListener("keydown", handleKeyPress)

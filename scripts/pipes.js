@@ -10,7 +10,7 @@ function movePipes() {
     if(!gameState.loopGenerate) return;
 
     gameState.pipesArray.forEach((pipeObj, index) => {
-        pipeObj.position += 2.49;
+        pipeObj.position += 2.485;
         pipeObj.element.style.right = pipeObj.position + "px"
 
         if(pipeObj.position >= 500){
@@ -23,11 +23,14 @@ function movePipes() {
 }
 
 function createNewPipe() {
-    const pipe = createPipeGroup()
-    pipe.style.right = gameState.positionStart + "px"
-    gameBoard.appendChild(pipe)
-
-    gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
+    if(gameState.gameStarted){
+        const pipe = createPipeGroup()
+        pipe.style.right = gameState.positionStart + "px"
+        gameBoard.appendChild(pipe)
+    
+        gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
+    
+    }
 }
 
 function createPipeGroup() {
@@ -51,12 +54,12 @@ function createPipeGroup() {
 }
 
 function getRandomHeights() {
-    const heightMax = 400;
-    const heightMin = 90;
-    const spaceBetween = 220;
+    const heightMax = 320;
+    const heightMin = 30;
+    const spaceBetween = 300;
 
     const heightTop = Math.floor(Math.random() * (heightMax - heightMin)) + heightMin;
-    const heightBase = 580 - heightTop - spaceBetween;
+    const heightBase = 700 - heightTop - spaceBetween;
 
     return { heightTop, heightBase };
 }
@@ -75,7 +78,7 @@ function positionPipe(pipe, type) {
         pipe.style.top = "0";
         pipe.style.transform = "rotate(180deg)";
     } else {
-        pipe.style.bottom = "90px";
+        pipe.style.bottom = "0px";
     }
 }
 

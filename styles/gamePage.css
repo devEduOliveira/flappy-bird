@@ -7,6 +7,29 @@
     background-position: inherit;
     background-position: 0 0;
 
+    .modalGameStart{
+        position: absolute;
+        width: 400px;
+        height: 610px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.253);
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .title{
+            position: absolute;
+            top: 50%;            
+            color: rgb(56, 56, 56);
+            font-size: 30px;
+        }
+    }
+
     .modalGameOver{
         position: absolute;
         width: 400px;

@@ -1,5 +1,6 @@
 import { birdState, drawBird, jumpBird } from "./bird.js";
 import { showGameOver } from "./gameOver.js";
+import { showGameStart } from "./gameStart.js";
 import { drawPipeLoop, movePipes, resetGamePipes } from "./pipes.js";
 
 export const gameBoard = document.querySelector('.gameBoard')
@@ -8,7 +9,7 @@ export let gameState = {
     positionStart: -100,
 
     gameOver: false,
-
+    gameStartPage: true, 
     gameStarted: false,
     tickSpeed: 2000,
     tickRate: 60,
@@ -33,7 +34,8 @@ function handleKeyPress(event){
     }
 
     if(!gameState.gameStarted && 
-        !gameState.gameOver && (
+        !gameState.gameOver && 
+        gameState.gameStartPage && (
         event.key == "" || 
         event.code == "Space"
     )){
@@ -50,11 +52,10 @@ function startGame() {
     drawBird()
 
     showGameOver(true)
-    gameState.gameOver = false;
-    
+    showGameStart(true)
+
     birdState.gravityValue = 2
-    birdState.birdY = 20
-    console.log("startgame");   
+    birdState.birdY = 20  
 }
 
 export function stopGame(){
@@ -66,18 +67,23 @@ export function stopGame(){
     gameState.pipeIntervalId = null;
 
     showGameOver(false)
-    gameState.gameOver = true;
 }
 
 export function resetGame(){
-    window.addEventListener
     document.querySelector(".game").classList.add("moveBackground")
     document.querySelector(".bird").style.top = "150px"
     resetGamePipes()
-    showGameOver(true)
-    gameState.gameOver = false;
 
-    birdState.gameIntervalBird = 0
+    setTimeout(() => {
+        showGameStart(false)
+        showGameOver(true)
+        birdState.gameIntervalBird = 0
+        
+        gameState.gameStartPage = true;  // Garantir que a página de início esteja ativa
+        gameState.gameOver = false;      // Resetar o estado do jogo
+        gameState.gameStarted = false; 
+    }, 100);
+    
 }
 
 window.addEventListener("keydown", handleKeyPress)

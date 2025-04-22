@@ -1,4 +1,5 @@
 import { createElement, gameState, resetGame } from "./global.js";
+import { scoreState } from "./score.js";
 const game = document.querySelector(".game")
 
 function createGameOver(){
@@ -8,7 +9,7 @@ function createGameOver(){
     gameoverTitle.textContent = "Game Over"
 
     let tempScore = createElement("h4", "tempScore")
-    tempScore.textContent = "Time: 03:02s"
+    tempScore.textContent = "Score:  Points"
 
     let inputName = createElement("input", "insertNickname")
     inputName.setAttribute("placeholder", "insert nickname")

@@ -19,21 +19,4 @@ export function showGameStart(boolean){
     gameState.gameStartPage = !boolean;
 }
 
-// window.addEventListener("keydown", closeModal)
-
-// function closeModal(event){
-
-//     if(gameState.gameOver && (event.code == "Space" || event.key == "")){
-//         let inputname = document.querySelector(".insertNickname")
-        
-//         if (document.activeElement === inputname) {
-//             resetGame()
-//             inputname.value = ""
-//         } else {
-//             inputname.focus()
-//         }
-        
-//     }
-
-// }
 

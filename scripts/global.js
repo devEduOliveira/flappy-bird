@@ -2,6 +2,7 @@ import { birdState, drawBird, jumpBird } from "./bird.js";
 import { showGameOver } from "./gameOver.js";
 import { showGameStart } from "./gameStart.js";
 import { drawPipeLoop, movePipes, resetGamePipes } from "./pipes.js";
+import { reloadScore, scoreState } from "./score.js";
 
 export const gameBoard = document.querySelector('.gameBoard')
 
@@ -59,7 +60,10 @@ function startGame() {
 }
 
 export function stopGame(){
+    document.querySelector(".tempScore").textContent = `Score: ${scoreState.score} points`
     document.querySelector(".game").classList.remove("moveBackground")
+    document.querySelector(".score").classList.toggle("hidden", true)
+
     gameState.loopGenerate = false;
     gameState.gameStarted = false;
 
@@ -78,10 +82,14 @@ export function resetGame(){
         showGameStart(false)
         showGameOver(true)
         birdState.gameIntervalBird = 0
+        scoreState.score = 0
+        document.querySelector(".score").classList.toggle("hidden", false)
         
         gameState.gameStartPage = true;  // Garantir que a página de início esteja ativa
         gameState.gameOver = false;      // Resetar o estado do jogo
         gameState.gameStarted = false; 
+
+        reloadScore()
     }, 100);
     
 }

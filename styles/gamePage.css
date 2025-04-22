@@ -7,6 +7,16 @@
     background-position: inherit;
     background-position: 0 0;
 
+    .score{
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        z-index: 99;
+
+        font-size: 48px;
+        color: white;
+    }
+
     .modalGameStart{
         position: absolute;
         width: 400px;

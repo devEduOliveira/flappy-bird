@@ -1,4 +1,5 @@
-import { createElement, gameState, resetGame } from "./global.js";
+import { createElement, gameState } from "./global.js";
+import { showRules } from "./rules.js";
 const game = document.querySelector(".game")
 
 function createGameStart(){
@@ -9,6 +10,7 @@ function createGameStart(){
 
     modalGameStart.appendChild(gameoverTitle)
 
+    game.appendChild(showRules())
     game.appendChild(modalGameStart)
 }
 createGameStart()

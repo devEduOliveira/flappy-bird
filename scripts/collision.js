@@ -21,8 +21,11 @@ export function checkColision(element){
             }
         })
         
-        if(birdCoords.top == 543.75){
-            stopGame()    
+        
+        if(birdCoords.top < 630){
+            document.querySelector(".bird").classList.toggle("skate", false)
+        } else {
+            document.querySelector(".bird").classList.toggle("skate", true)
         }
     }
 }

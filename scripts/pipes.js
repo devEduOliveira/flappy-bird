@@ -1,8 +1,8 @@
 import { createElement, gameBoard, gameState } from "./global.js";
+import { reloadScore, scoreState } from "./score.js";
 
 export function drawPipeLoop() {
-    clearInterval(gameState.pipeIntervalId); // limpa o anterior, mesmo que seja null
-
+    clearInterval(gameState.pipeIntervalId); 
     gameState.pipeIntervalId = setInterval(() => {
         createNewPipe();
     }, gameState.tickSpeed);
@@ -11,9 +11,15 @@ export function drawPipeLoop() {
 export function movePipes() {
     if(!gameState.loopGenerate) return;
 
-    gameState.pipesArray.forEach((pipeObj, index) => {
+    gameState.pipesArray.forEach((pipeObj, index, point) => {
         pipeObj.position += 2.485;
         pipeObj.element.style.right = pipeObj.position + "px"
+
+        if(!pipeObj.point && pipeObj.position > 200){
+            pipeObj.point = true
+            scoreState.score += 1
+            reloadScore()
+        }
 
         if(pipeObj.position >= 500){
             gameBoard.removeChild(pipeObj.element)
@@ -30,7 +36,7 @@ function createNewPipe() {
         pipe.style.right = gameState.positionStart + "px"
         gameBoard.appendChild(pipe)
     
-        gameState.pipesArray.push({element: pipe, position: gameState.positionStart})
+        gameState.pipesArray.push({element: pipe, position: gameState.positionStart, validPoint: false})
     
     }
 }

@@ -7,12 +7,53 @@
     background-position: inherit;
     background-position: 0 0;
 
+    .scoreRank{
+        display: block;
+        opacity: 1;
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        width:  300px;
+        min-height: 1px;
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+    
+            td, th {
+                margin: 0;
+                padding: 0 8px;
+                border: 1.6px solid var(--cor-grade);
+                text-align: left;
+                color: black;
+                background-color: gainsboro;
+            }
+
+            th{
+                background-color: orange;
+                color: white;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #dddddd;
+              }
+
+            #rank{
+                width: 25px;
+            }
+            #score{
+                width: 50px;
+          }
+        }
+    }
+    
     .score{
         position: absolute;
-        top: 20%;
-        left: 50%;
+        top: 10%;
+        width: 100%;
+        text-align: center;
         z-index: 99;
-
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 48px;
         color: white;
     }

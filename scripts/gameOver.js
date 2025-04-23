@@ -1,5 +1,5 @@
 import { createElement, gameState, resetGame } from "./global.js";
-import { scoreState } from "./score.js";
+import { savePlayer, scoreState } from "./score.js";
 const game = document.querySelector(".game")
 
 function createGameOver(){
@@ -44,7 +44,12 @@ function closeModal(event){
         
         if (document.activeElement === inputname) {
             resetGame()
-            inputname.value = ""
+            
+            if(scoreState.score > 1 && inputname.value.trim() !== ""){
+                savePlayer(inputname.value.trim(), scoreState.score)
+                console.log(inputname.value.trim());
+            }
+            inputname.value = inputname.value.trim()
         } else {
             inputname.focus()
         }

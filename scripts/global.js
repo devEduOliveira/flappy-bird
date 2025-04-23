@@ -61,7 +61,6 @@ function startGame() {
 
 export function stopGame(){
     document.querySelector(".tempScore").textContent = `Score: ${scoreState.score} points`
-    document.querySelector(".game").classList.remove("moveBackground")
     document.querySelector(".score").classList.toggle("hidden", true)
 
     gameState.loopGenerate = false;
@@ -74,7 +73,6 @@ export function stopGame(){
 }
 
 export function resetGame(){
-    document.querySelector(".game").classList.add("moveBackground")
     document.querySelector(".bird").style.top = "150px"
     resetGamePipes()
 

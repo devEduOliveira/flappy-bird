@@ -2,8 +2,8 @@ import { checkColision } from "./collision.js";
 import { createElement, gameBoard, gameState } from "./global.js";
 
 export let birdState = {
-    screenTop: -30,   
-    screenBottom: 490,
+    screenTop: 0,   
+    screenBottom: 580,
 
     birdElement: "",
     gameIntervalBird: "",
